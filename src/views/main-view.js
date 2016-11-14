@@ -37,7 +37,7 @@ export default (state, prev, send) =>
         : null
       }
       ${
-        state.firstTime
+        state.firstTime && state.cameraReady
         ? html`<h5 id="first-time">Try taking a picture of something.</h5>`
         : null
       }
