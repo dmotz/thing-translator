@@ -72,16 +72,11 @@ const langMap = {
 }
 
 export default function translate(raw, state, send, done) {
+
+  const failureState = () => send('setLabelPair', {label: '?', translation: '?', guesses: ''}, done)
+
   if (!raw.length) {
-    return send(
-      'setLabelPair',
-      {
-        label:       '?',
-        translation: '?',
-        guesses:     ''
-      },
-      done
-    )
+    return failureState()
   }
 
   const labels = raw.map(l => l.description)
@@ -101,15 +96,7 @@ export default function translate(raw, state, send, done) {
     `${apiUrls.translate}&q=${term}&source=en&target=${langMap[state.activeLang]}`,
     (err, res, body) => {
       if (err) {
-        return send(
-          'setLabelPair',
-          {
-            label:       '?',
-            translation: '?',
-            guesses:     ''
-          },
-          done
-        )
+        return failureState()
       }
 
       const translation = JSON.parse(body).data.translations[0].translatedText
