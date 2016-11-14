@@ -51,7 +51,7 @@ export default function snap(_, state, send, done) {
     },
     (err, res, body) => {
       let labels
-      if (!body.responses || !body.responses.length || !body.responses[0].labelAnnotations) {
+      if (err || !body.responses || !body.responses.length || !body.responses[0].labelAnnotations) {
         labels = []
       } else {
         labels = body.responses[0].labelAnnotations
