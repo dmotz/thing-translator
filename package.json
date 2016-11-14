@@ -10,8 +10,9 @@
     "url": "http://oxism.com"
   },
   "scripts": {
+    "bundle": "NODE_ENV=production browserify -e src/app.js -g babelify -g envify -g unassertify -g uglifyify | uglifyjs > app.js",
     "dev": "parallelshell 'npm run watch' 'npm run watch-style'",
-    "watch": "budo src/app.js -s dist/js/main.js --live -- -t babelify",
+    "watch": "budo src/app.js --live -- -t babelify",
     "watch-style": "stylus -c -u nib -w style/main.styl -o app.css"
   },
   "license": "MIT",
@@ -22,10 +23,15 @@
     "browserify": "^13.1.1",
     "budo": "^9.2.1",
     "choo": "^3.3.0",
+    "envify": "^3.4.1",
     "he": "^1.1.0",
     "nib": "^1.1.2",
     "parallelshell": "^2.0.0",
-    "stylus": "^0.54.5"
+    "stylus": "^0.54.5",
+    "uglify-js": "^2.7.4",
+    "uglifyify": "^3.0.4",
+    "unassertify": "^2.0.3",
+    "yo-yoify": "^3.4.1"
   },
   "browserify": {
     "transform": [
