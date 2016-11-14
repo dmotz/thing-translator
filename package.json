@@ -1,0 +1,42 @@
+{
+  "name": "thing-translator",
+  "version": "0.0.1",
+  "description": "Thing Translator is an AI Experiment that lets you point your camera at things to hear how to say them in a different language.",
+  "private": true,
+  "main": "src/app.js",
+  "author": {
+    "name": "Dan Motzenbecker",
+    "email": "dan@oxism.com",
+    "url": "http://oxism.com"
+  },
+  "scripts": {
+    "dev": "parallelshell 'npm run watch' 'npm run watch-style'",
+    "watch": "budo src/app.js -s dist/js/main.js --live -- -t babelify",
+    "watch-style": "stylus -c -u nib -w style/main.styl -o app.css"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "babel-polyfill": "^6.16.0",
+    "babel-preset-es2015": "^6.18.0",
+    "babelify": "^7.3.0",
+    "browserify": "^13.1.1",
+    "budo": "^9.2.1",
+    "choo": "^3.3.0",
+    "he": "^1.1.0",
+    "nib": "^1.1.2",
+    "parallelshell": "^2.0.0",
+    "stylus": "^0.54.5"
+  },
+  "browserify": {
+    "transform": [
+      [
+        "babelify",
+        {
+          "presets": [
+            "es2015"
+          ]
+        }
+      ]
+    ]
+  }
+}
