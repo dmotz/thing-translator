@@ -1,4 +1,3 @@
-import 'babel-polyfill'
 import choo from 'choo'
 import requestCamera from './effects/request-camera'
 import requestFullscreen from './effects/request-fullscreen'
