@@ -1,11 +1,13 @@
 require('array.prototype.find').shim()
 require('array.prototype.findindex').shim()
+
 import choo from 'choo'
 import requestCamera from './effects/request-camera'
 import requestFullscreen from './effects/request-fullscreen'
 import snap from './effects/snap'
 import translate from './effects/translate'
 import baseView from './views/base-view'
+
 
 const app = choo()
 
@@ -25,7 +27,8 @@ app.model({
     translation: '',
     activeLang:  'spanish',
     targetLang:  'english',
-    guesses:     ''
+    guesses:     '',
+    rotateTerms: true
   },
   subscriptions: [
     (send, done) => document.addEventListener('DOMContentLoaded', _ => send('requestCamera', done))
