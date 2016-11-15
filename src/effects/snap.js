@@ -52,10 +52,7 @@ export default function snap(_, state, send, done) {
             image: {
               content: state.canvas.toDataURL('image/jpeg', 1).replace('data:image/jpeg;base64,', '')
             },
-            features: {
-              type: 'LABEL_DETECTION',
-              maxResults: 50
-            }
+            features: {type: 'LABEL_DETECTION', maxResults: 10}
           }
         ]
       }
