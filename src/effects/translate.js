@@ -86,11 +86,16 @@ export default function translate(raw, state, send, done) {
     filtered = labels
   }
 
-  const term    = filtered[0]
   const guesses = raw
     .slice(0, 3)
     .map(o => `${o.description}: ${Math.round(o.score * 100)}%`)
     .join(', ')
+
+  let term = filtered[0]
+
+  if (state.rotateTerms && term === state.label && filtered.length > 1) {
+    term = filtered.slice(1)[Math.floor(Math.random() * (filtered.length - 1))]
+  }
 
   http.get(
     `${apiUrls.translate}&q=${term}&source=en&target=${langMap[state.activeLang]}`,
