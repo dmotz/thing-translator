@@ -1,18 +1,28 @@
 import http from 'choo/http'
 import {apiUrls} from '../config'
 
+const breakPoint = 800
+const canvSize   = 640
+const targetPct  = 0.7
+
 export default function snap(_, state, send, done) {
   send('startSnap', done)
-  const canvSize = 640
-  const cropSize = 700
 
-  if (window.innerWidth >= 800) {
+  const winW = window.innerWidth
+  const winH = window.innerHeight
+  const vidW = state.video.videoWidth
+  const vidH = state.video.videoHeight
+
+  if (winW >= breakPoint) {
+    const cropSize   = Math.min(winW, winH) * targetPct
+    const sourceSize = (cropSize / Math.max(winW, winH)) * vidW
+
     state.ctx.drawImage(
       state.video,
-      Math.round(((window.innerWidth / 2 - (cropSize / 2)) / window.innerWidth) * state.video.videoWidth),
-      Math.round(((window.innerHeight / 2 - (cropSize * 0.6)) / window.innerHeight) * state.video.videoHeight),
-      (cropSize / window.innerWidth) * state.video.videoWidth,
-      (cropSize / window.innerWidth) * state.video.videoWidth,
+      Math.round(((winW / 2 - (cropSize / 2)) / winW) * vidW),
+      Math.round(((winH * 0.4 - (cropSize / 2)) / winH) * vidH),
+      sourceSize,
+      sourceSize,
       0,
       0,
       canvSize,
@@ -21,10 +31,10 @@ export default function snap(_, state, send, done) {
   } else {
     state.ctx.drawImage(
       state.video,
-      (state.video.videoWidth - state.video.videoHeight) / 2,
+      (vidW - vidH) / 2,
       0,
-      state.video.videoHeight,
-      state.video.videoHeight,
+      vidH,
+      vidH,
       0,
       0,
       canvSize,
