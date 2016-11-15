@@ -71,6 +71,8 @@ const langMap = {
   hindi:    'hi'
 }
 
+const cache = {}
+
 export default function translate(raw, state, send, done) {
 
   const failureState = () => send('setLabelPair', {label: '?', translation: '?', guesses: ''}, done)
@@ -97,6 +99,17 @@ export default function translate(raw, state, send, done) {
     term = filtered.slice(1)[Math.floor(Math.random() * (filtered.length - 1))]
   }
 
+  if (!cache[state.activeLang]) {
+    cache[state.activeLang] = {}
+  }
+
+  const cacheHit = cache[state.activeLang][term]
+  if (cacheHit) {
+    send('setLabelPair', {label: he.decode(term), translation: cacheHit, guesses}, done)
+    speak(cacheHit, state.activeLang, speak.bind(null, term, state.targetLang))
+    return
+  }
+
   http.get(
     `${apiUrls.translate}&q=${term}&source=en&target=${langMap[state.activeLang]}`,
     (err, res, body) => {
@@ -104,17 +117,10 @@ export default function translate(raw, state, send, done) {
         return failureState()
       }
 
-      const translation = JSON.parse(body).data.translations[0].translatedText
-      send(
-        'setLabelPair',
-        {
-          label:       he.decode(term),
-          translation: he.decode(translation),
-          guesses
-        },
-        done
-      )
+      const translation = he.decode(JSON.parse(body).data.translations[0].translatedText)
+      send('setLabelPair', {label: he.decode(term), translation, guesses}, done)
       speak(translation, state.activeLang, speak.bind(null, term, state.targetLang))
+      cache[state.activeLang][term] = translation
     }
   )
 }
