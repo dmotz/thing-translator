@@ -1,3 +1,4 @@
+// Insert your own API keys here:
 const cloudVisionKey = ''
 const translateKey   = ''
 
