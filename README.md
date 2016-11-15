@@ -1,6 +1,10 @@
 # [Thing Translator](https://oxism.com/thing-translator/)
 ### [An AI Experiment](https://aiexperiments.withgoogle.com/)
+
+![](https://oxism.com/thing-translator/thing-translator.gif)
+
 ![](https://lh3.googleusercontent.com/khbjth0AxLYjz8E74iSUkuFssohsIG5qIQ-8x0PXOieEm0wm-g98OFFS0TURr6-381CsKGI7iSxahUKm6PcyoV4rxHClvZ67UA=s640)
+
 ![](https://lh3.googleusercontent.com/9egZnC80nRDa9tMJrL079ClkeSdyfjMp0I4UQgjRFKb1uZmHM3Gdtk-q859HEBOUA2jaF64SSeQsGnrnWIkZ4iCfu0uzWg3Nfw=s640)
 ---
 
