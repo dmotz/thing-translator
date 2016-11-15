@@ -4,6 +4,7 @@ import {apiUrls} from '../config'
 const breakPoint = 800
 const canvSize   = 640
 const targetPct  = 0.7
+const targetTop  = 0.4
 
 export default function snap(_, state, send, done) {
   send('startSnap', done)
@@ -20,7 +21,7 @@ export default function snap(_, state, send, done) {
     state.ctx.drawImage(
       state.video,
       Math.round(((winW / 2 - (cropSize / 2)) / winW) * vidW),
-      Math.round(((winH * 0.4 - (cropSize / 2)) / winH) * vidH),
+      Math.round(((winH * targetTop - (cropSize / 2)) / winH) * vidH),
       sourceSize,
       sourceSize,
       0,
