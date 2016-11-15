@@ -1,3 +1,5 @@
+require('array.prototype.find').shim()
+require('array.prototype.findindex').shim()
 import choo from 'choo'
 import requestCamera from './effects/request-camera'
 import requestFullscreen from './effects/request-fullscreen'
