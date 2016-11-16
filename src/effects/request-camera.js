@@ -48,7 +48,7 @@ export default function requestCamera(_, state, send, done) {
           done
         )
       },
-      send.bind(null, 'camera:cameraError', done)
+      send.bind(null, 'cameraError', done)
     )
   }
 
