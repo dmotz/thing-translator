@@ -28,7 +28,7 @@ export default function requestCamera(_, state, send, done) {
     getUserMedia(
       {
         audio: false,
-        video: sourceSupport ? {optional: [{sourceId: source.id}]} : true
+        video: sourceSupport && source ? {optional: [{sourceId: source.id}]} : true
       },
       stream => {
         const canvas    = document.getElementById('canvas')
