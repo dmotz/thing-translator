@@ -31,8 +31,7 @@
     "stylus": "^0.54.5",
     "uglify-js": "^2.7.4",
     "uglifyify": "^3.0.4",
-    "unassertify": "^2.0.3",
-    "yo-yoify": "^3.4.1"
+    "unassertify": "^2.0.3"
   },
   "browserify": {
     "transform": [
