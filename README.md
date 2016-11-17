@@ -1,6 +1,6 @@
 # [Thing Translator](https://oxism.com/thing-translator/)
 ### [An AI Experiment](https://aiexperiments.withgoogle.com/)
-[Try the live demo here.](https://oxism.com/thing-translator/)
+[✨ Try the live demo here. ✨](https://oxism.com/thing-translator/)
 
 ![](https://oxism.com/thing-translator/thing-translator.gif)
 
