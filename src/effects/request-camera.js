@@ -12,23 +12,49 @@ export default function requestCamera(_, state, send, done) {
     return send('cameraError', done)
   }
 
-  const sourceSupport = MediaStreamTrack && MediaStreamTrack.getSources
+  const sourceEnumSupport  = navigator.mediaDevices && navigator.mediaDevices.enumerateDevices
+  const streamTrackSupport = MediaStreamTrack && MediaStreamTrack.getSources
 
   const initCameraRequest = sources => {
     let source
+    const sourceSupport = sourceEnumSupport || streamTrackSupport
 
-    if (sourceSupport) {
-      source = sources.find(s => s.facing === 'environment')
+    if (sourceSupport && sources && sources.length) {
 
-      if (!source) {
-        source = sources.find(s => s.kind === 'video')
+      if (sourceEnumSupport) {
+        for (let i = 0; i < sources.length; i++) {
+          const candidate = sources[i]
+
+          if (candidate.kind === 'videoinput') {
+            if (typeof candidate.getCapabilities === 'function') {
+              const capabilities = candidate.getCapabilities()
+
+              if (capabilities && capabilities.facingMode === 'environment') {
+                source = candidate
+                break
+              }
+            }
+
+            if (/facing back/i.test(candidate.label)) {
+              source = candidate
+              break
+            }
+          }
+        }
+      } else {
+        source = sources.find(s => s.facing === 'environment')
+        if (!source) {
+          source = sources.find(s => s.kind === 'video')
+        }
       }
     }
 
     getUserMedia(
       {
         audio: false,
-        video: sourceSupport && source ? {optional: [{sourceId: source.id}]} : true
+        video: source
+          ? {optional: [{sourceId: sourceEnumSupport ? source.deviceId : source.id}]}
+          : true
       },
       stream => {
         const canvas    = document.getElementById('canvas')
@@ -52,9 +78,13 @@ export default function requestCamera(_, state, send, done) {
     )
   }
 
-  if (sourceSupport) {
+  if (sourceEnumSupport) {
+    navigator.mediaDevices.enumerateDevices()
+      .then(initCameraRequest)
+      .catch(_ => initCameraRequest(null))
+  } else if (streamTrackSupport) {
     MediaStreamTrack.getSources(initCameraRequest)
   } else {
-    initCameraRequest()
+    initCameraRequest(null)
   }
 }
