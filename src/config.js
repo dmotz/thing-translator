@@ -1,6 +1,6 @@
 // Insert your own API keys here:
-const cloudVisionKey = ''
-const translateKey   = ''
+const cloudVisionKey = '';
+const translateKey   = '';
 
 export const apiUrls = {
   cloudVision: 'https://vision.googleapis.com/v1/images:annotate?key=' + cloudVisionKey,
@@ -9,5 +9,5 @@ export const apiUrls = {
 
 export const langList = [
   'spanish', 'french', 'german', 'italian', 'chinese', 'japanese', 'korean',
-  'hindi', 'dutch'
+  'hindi', 'dutch', 'bangla'
 ]
