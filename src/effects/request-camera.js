@@ -87,7 +87,7 @@ const activateCamera = (sources, send, done) => {
         done
       )
     },
-    send.bind(null, 'cameraError', done)
+    _ => send('cameraError', done)
   )
 }
 
