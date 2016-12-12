@@ -1,0 +1,25 @@
+{
+	"name": "Thing Translator",
+	"short_name": "Thing Translator",
+	"start_url": "./?utm_source=homescreen",
+	"scope": "/",
+	"display": "standalone",
+	"theme_color": "#212121",
+	"background_color": "#fff",
+	"icons": [
+		{
+			"src": "logo-192x192.png",
+			"sizes": "192x192",
+			"type": "image/png"
+		},
+		{
+			"src": "logo-512x512.png",
+			"sizes": "512x512",
+			"type": "image/png"
+		},
+		{
+			"src": "logo.svg",
+			"type": "image/svg+xml"
+		}
+	]
+}

@@ -1,6 +1,6 @@
 {
   "name": "thing-translator",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Thing Translator is an AI Experiment that lets you point your camera at things to hear how to say them in a different language.",
   "private": true,
   "main": "src/app.js",
@@ -11,9 +11,10 @@
   },
   "scripts": {
     "bundle": "NODE_ENV=production browserify -e src/app.js -g babelify -g envify -g unassertify -g uglifyify | uglifyjs > app.js",
-    "dev": "parallelshell 'npm run watch' 'npm run watch-style'",
+    "dev": "parallelshell 'npm run watch' 'npm run watch-style' 'npm run gen-sw-precache'",
     "watch": "budo src/app.js --live -- -t babelify",
-    "watch-style": "stylus -c -u nib -w style/main.styl -o app.css"
+    "watch-style": "stylus -c -u nib -w style/main.styl -o app.css",
+    "gen-sw-precache": "sw-precache --config=sw-precache-config.js"
   },
   "license": "MIT",
   "dependencies": {
@@ -29,6 +30,7 @@
     "nib": "^1.1.2",
     "parallelshell": "^2.0.0",
     "stylus": "^0.54.5",
+    "sw-precache": "^4.2.2",
     "uglify-js": "^2.7.4",
     "uglifyify": "^3.0.4",
     "unassertify": "^2.0.3"
