@@ -3,7 +3,6 @@ const streamTrackSupport = MediaStreamTrack && MediaStreamTrack.getSources
 const sourceSupport      = sourceEnumSupport || streamTrackSupport
 
 let attemptedTwice = false
-let lastStream
 
 const getUserMedia = (() => {
   const fn = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia
@@ -59,8 +58,6 @@ const activateCamera = (sources, send, done) => {
         : true
     },
     stream => {
-      lastStream = stream
-
       if (sourceEnumSupport && !source && !attemptedTwice) {
         attemptedTwice = true
         setTimeout(() => {
