@@ -102,7 +102,7 @@ export default function requestCamera(_, state, send, done) {
     return
   }
 
-  if (!getUserMedia) {
+  if (!getUserMedia || !URL) {
     return send('cameraError', done)
   }
 
