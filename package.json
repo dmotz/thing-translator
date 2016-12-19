@@ -10,7 +10,9 @@
     "url": "http://oxism.com"
   },
   "scripts": {
-    "bundle": "NODE_ENV=production browserify -e src/app.js -g babelify -g envify -g unassertify -g uglifyify | uglifyjs --screw-ie8 -m -c | sed 's/@@@@@/'$(head api_key)'/' > app.js",
+    "bundle": "npm run bundle-css && npm run bundle-js",
+    "bundle-js": "NODE_ENV=production browserify -e src/app.js -g babelify -g envify -g unassertify -g uglifyify | uglifyjs --screw-ie8 -m -c | sed 's/@@@@@/'$(head api_key)'/' > app.js",
+    "bundle-css": "stylus -c -u nib style/main.styl -o app.css",
     "dev": "parallelshell 'npm run watch' 'npm run watch-style'",
     "watch": "budo src/app.js --live -- -t babelify",
     "watch-style": "stylus -c -u nib -w style/main.styl -o app.css"
