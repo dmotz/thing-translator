@@ -1,6 +1,8 @@
-const sourceEnumSupport  = navigator.mediaDevices && navigator.mediaDevices.enumerateDevices
-const streamTrackSupport = MediaStreamTrack && MediaStreamTrack.getSources
-const sourceSupport      = sourceEnumSupport || streamTrackSupport
+const {MediaStreamTrack, URL} = window
+const {mediaDevices}          = navigator
+const sourceEnumSupport       = mediaDevices && mediaDevices.enumerateDevices
+const streamTrackSupport      = MediaStreamTrack && MediaStreamTrack.getSources
+const sourceSupport           = sourceEnumSupport || streamTrackSupport
 
 let attemptedTwice = false
 
@@ -90,7 +92,7 @@ const activateCamera = (sources, send, done) => {
 
 
 const enumerateDevices = (send, done) =>
-  navigator.mediaDevices.enumerateDevices()
+  mediaDevices.enumerateDevices()
     .then(sources => activateCamera(sources, send, done))
     .catch(_ => activateCamera(null, send, done))
 
