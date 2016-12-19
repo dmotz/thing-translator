@@ -2,7 +2,9 @@ import http from 'choo/http'
 import he from 'he'
 import {apiUrls} from '../config'
 
-const speechSupport = window.speechSynthesis && window.SpeechSynthesisUtterance
+const {speechSynthesis, SpeechSynthesisUtterance} = window
+
+const speechSupport = speechSynthesis && SpeechSynthesisUtterance
 const filterLong    = true
 const lengthLimit   = 8
 
