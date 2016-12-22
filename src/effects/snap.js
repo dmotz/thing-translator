@@ -6,7 +6,7 @@ const canvSize   = 640
 const targetPct  = 0.7
 const targetTop  = 0.4
 
-export default function snap(_, state, send, done) {
+export default function snap(state, _, send, done) {
   send('startSnap', done)
 
   const winW = window.innerWidth

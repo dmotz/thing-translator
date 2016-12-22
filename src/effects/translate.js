@@ -75,7 +75,7 @@ const langMap = {
 
 const cache = {}
 
-export default function translate(raw, state, send, done) {
+export default function translate(state, raw, send, done) {
 
   const failureState = () => send('setLabelPair', {label: '?', translation: '?', guesses: ''}, done)
 

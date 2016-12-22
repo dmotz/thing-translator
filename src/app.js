@@ -40,19 +40,19 @@ app.model({
     startSnap:     _ => ({isSnapping: true, firstTime: false}),
     endSnap:       _ => ({isSnapping: false}),
     setFullscreen: _ => ({fullscreen: true}),
-    setLabelPair:  labels => labels,
-    changeLang:    lang => ({
+    setLabelPair:  (_, labels) => labels,
+    changeLang:    (_, lang) => ({
       activeView:  'main',
       activeLang:  lang,
       label:       '',
       translation: ''
     }),
-    setStream:     payload => ({
+    setStream:     (_, {stream, video, ctx, canvas}) => ({
       cameraReady: true,
-      streamUrl:   payload.stream,
-      video:       payload.video,
-      ctx:         payload.ctx,
-      canvas:      payload.canvas
+      streamUrl:   stream,
+      video,
+      ctx,
+      canvas
     })
   },
   effects: {

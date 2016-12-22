@@ -1,4 +1,4 @@
-export default function requestFullscreen(_, state, send, done) {
+export default function requestFullscreen(state, _, send, done) {
   if (document.body.requestFullscreen) {
     document.body.requestFullscreen()
   } else if (document.body.webkitRequestFullscreen) {

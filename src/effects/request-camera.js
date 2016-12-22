@@ -97,7 +97,7 @@ const enumerateDevices = (send, done) =>
     .catch(_ => activateCamera(null, send, done))
 
 
-export default function requestCamera(_, state, send, done) {
+export default function requestCamera(state, _, send, done) {
   if (state.cameraReady) {
     return
   }
