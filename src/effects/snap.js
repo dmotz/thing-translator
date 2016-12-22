@@ -1,4 +1,4 @@
-import http from 'choo/http'
+import xhr from 'xhr'
 import {apiUrls} from '../config'
 
 const breakPoint = 800
@@ -43,7 +43,7 @@ export default function snap(state, _, send, done) {
     )
   }
 
-  http.post(
+  xhr.post(
     apiUrls.cloudVision,
     {
       json: {

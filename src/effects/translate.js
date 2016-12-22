@@ -1,4 +1,4 @@
-import http from 'choo/http'
+import xhr from 'xhr'
 import he from 'he'
 import {apiUrls} from '../config'
 
@@ -112,7 +112,7 @@ export default function translate(state, raw, send, done) {
     return
   }
 
-  http.get(
+  xhr.get(
     `${apiUrls.translate}&q=${term}&source=en&target=${langMap[state.activeLang]}`,
     (err, res, body) => {
       if (err) {
