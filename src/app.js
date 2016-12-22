@@ -63,5 +63,5 @@ app.model({
   }
 })
 
-app.router(['/', baseView])
+app.router({default: '/'}, [['/', baseView]])
 document.body.appendChild(app.start())
