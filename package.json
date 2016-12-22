@@ -25,15 +25,16 @@
     "babelify": "^7.3.0",
     "browserify": "^13.1.1",
     "budo": "^9.2.1",
-    "choo": "^3.3.0",
-    "envify": "^3.4.1",
+    "choo": "^4.0.3",
+    "envify": "^4.0.0",
     "he": "^1.1.0",
     "nib": "^1.1.2",
     "parallelshell": "^2.0.0",
     "stylus": "^0.54.5",
     "uglify-js": "^2.7.4",
     "uglifyify": "^3.0.4",
-    "unassertify": "^2.0.3"
+    "unassertify": "^2.0.3",
+    "xhr": "^2.3.2"
   },
   "browserify": {
     "transform": [
