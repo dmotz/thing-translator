@@ -141,13 +141,15 @@ body
     h4
       text-transform uppercase
       font-size 4vmin
-      text-decoration underline
-      color $yellow
 
     &:first-child
-      h4:hover
-        cursor pointer
-        opacity .6
+      h4
+        text-decoration underline
+        color $yellow
+        &:hover
+          cursor pointer
+          opacity .6
+
 
 
 #main-view.spell-view
