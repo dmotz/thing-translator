@@ -94,7 +94,7 @@ export default function snap(state, _, send, done) {
       }
       var key = check_local_storage() + 1
       console.log("setting " + key + " to " + JSON.stringify(json_row))
-      localStorage.setItem(key, json_row);
+      localStorage.setItem(key, JSON.stringify(json_row));
 
       send('translate', labels, done)
       setTimeout(send.bind(null, 'endSnap', done), 200)
