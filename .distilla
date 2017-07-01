@@ -1,0 +1,15 @@
+preview: true
+
+hashing:
+  index.html:
+    - app.js
+    - app.css
+
+tasks:
+  npm run bundle-js:
+    - app.js
+    - app.js
+
+  npm run bundle-css:
+    - app.css
+    - app.css
