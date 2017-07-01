@@ -16,7 +16,7 @@ app.model({
     activeView:  'main',
     cameraReady: false,
     cameraError: false,
-    streamUrl:   null,
+    stream:      null,
     video:       null,
     ctx:         null,
     canvas:      null,
@@ -49,7 +49,7 @@ app.model({
     }),
     setStream:     (_, {stream, video, ctx, canvas}) => ({
       cameraReady: true,
-      streamUrl:   stream,
+      stream,
       video,
       ctx,
       canvas
