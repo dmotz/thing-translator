@@ -6,6 +6,6 @@ export default _ =>
       Your device doesn’t allow access to the camera.
       <br>
       <br>
-      Please try it on your desktop, Android, or iOS (>=11) device.
+      Please try it on your desktop, Android, or iOS (${'>'}=11) device.
     </h1>
   `
