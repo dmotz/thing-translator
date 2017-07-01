@@ -1,8 +1,8 @@
-const {MediaStreamTrack, URL} = window
-const {mediaDevices}          = navigator
-const sourceEnumSupport       = mediaDevices && mediaDevices.enumerateDevices
-const streamTrackSupport      = MediaStreamTrack && MediaStreamTrack.getSources
-const sourceSupport           = sourceEnumSupport || streamTrackSupport
+const {MediaStreamTrack} = window
+const {mediaDevices}     = navigator
+const sourceEnumSupport  = mediaDevices && mediaDevices.enumerateDevices
+const streamTrackSupport = MediaStreamTrack && MediaStreamTrack.getSources
+const sourceSupport      = sourceEnumSupport || streamTrackSupport
 
 let attemptedTwice = false
 
@@ -71,16 +71,15 @@ const activateCamera = (sources, send, done) => {
 
       const canvas    = document.getElementById('canvas')
       const videoEl   = document.getElementById('video')
-      const streamUrl = URL.createObjectURL(stream)
 
-      videoEl.src = streamUrl
+      videoEl.srcObject = stream
 
       send(
         'setStream',
         {
-          stream: streamUrl,
-          video:  videoEl,
-          ctx:    canvas.getContext('2d'),
+          video: videoEl,
+          ctx:   canvas.getContext('2d'),
+          stream,
           canvas
         },
         done
@@ -102,7 +101,7 @@ export default function requestCamera(state, _, send, done) {
     return
   }
 
-  if (!getUserMedia || !URL) {
+  if (!getUserMedia) {
     return send('cameraError', done)
   }
 
