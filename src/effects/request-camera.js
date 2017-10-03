@@ -11,7 +11,6 @@ const getUserMedia = (() => {
   return fn ? fn.bind(navigator) : null
 })()
 
-
 const findBestSource = sources => {
   let source = null
 
@@ -48,8 +47,19 @@ const findBestSource = sources => {
   return source
 }
 
+const activateCamera = (send, done) => {
+  navigator.mediaDevices.getUserMedia({
+    audio: false,
+    video: {facingMode: {exact: 'environment'}}}
+  )
+  .then(stream => cameraSuccess(stream, send, done))
+  .catch(err => {
+    console.error(err)
+    send('cameraError', done)
+  })
+}
 
-const activateCamera = (sources, send, done) => {
+const activateCameraLegacy = (sources, send, done) => {
   const source = findBestSource(sources)
 
   getUserMedia(
@@ -68,37 +78,46 @@ const activateCamera = (sources, send, done) => {
         }, 1)
         return
       }
-
-      const canvas    = document.getElementById('canvas')
-      const videoEl   = document.getElementById('video')
-
-      videoEl.srcObject = stream
-
-      send(
-        'setStream',
-        {
-          video: videoEl,
-          ctx:   canvas.getContext('2d'),
-          stream,
-          canvas
-        },
-        done
-      )
+      cameraSuccess(stream, send, done)
     },
-    _ => send('cameraError', done)
+    err => {
+      console.error(err)
+      send('cameraError', done)
+    }
   )
 }
 
+const cameraSuccess = (stream, send, done) => {
+  const canvas  = document.getElementById('canvas')
+  const videoEl = document.getElementById('video')
+
+  videoEl.srcObject = stream
+
+  send(
+    'setStream',
+    {
+      video: videoEl,
+      ctx:   canvas.getContext('2d'),
+      stream,
+      canvas
+    },
+    done
+  )
+}
 
 const enumerateDevices = (send, done) =>
   mediaDevices.enumerateDevices()
-    .then(sources => activateCamera(sources, send, done))
-    .catch(_ => activateCamera(null, send, done))
+    .then(sources => activateCameraLegacy(sources, send, done))
+    .catch(_ => activateCameraLegacy(null, send, done))
 
 
 export default function requestCamera(state, _, send, done) {
   if (state.cameraReady) {
     return
+  }
+
+  if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+    return activateCamera(send, done)
   }
 
   if (!getUserMedia) {
@@ -108,8 +127,8 @@ export default function requestCamera(state, _, send, done) {
   if (sourceEnumSupport) {
     enumerateDevices(send, done)
   } else if (streamTrackSupport) {
-    MediaStreamTrack.getSources(sources => activateCamera(sources, send, done))
+    MediaStreamTrack.getSources(sources => activateCameraLegacy(sources, send, done))
   } else {
-    activateCamera(null, send, done)
+    activateCameraLegacy(null, send, done)
   }
 }
