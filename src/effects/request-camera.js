@@ -50,8 +50,8 @@ const findBestSource = sources => {
 const activateCamera = (send, done, noConstraint) => {
   navigator.mediaDevices.getUserMedia({
     audio: false,
-    video: noConstraint || {facingMode: {exact: 'environment'}}}
-  )
+    video: noConstraint || {facingMode: {exact: 'environment'}}
+  })
   .then(stream => cameraSuccess(stream, send, done))
   .catch(err => {
     if (!noConstraint && err.name === 'ConstraintNotSatisfiedError') {
