@@ -18,6 +18,8 @@ export default function snap(state, _, send, done) {
     const cropSize   = Math.min(winW, winH) * targetPct
     const sourceSize = (cropSize / Math.max(winW, winH)) * vidW
 
+    state.canvas.width = state.canvas.height = canvSize
+
     state.ctx.drawImage(
       state.video,
       Math.round(((winW / 2 - (cropSize / 2)) / winW) * vidW),
@@ -30,17 +32,9 @@ export default function snap(state, _, send, done) {
       canvSize
     )
   } else {
-    state.ctx.drawImage(
-      state.video,
-      Math.abs(vidW - vidH) / 2,
-      0,
-      vidH,
-      vidH,
-      0,
-      0,
-      canvSize,
-      canvSize
-    )
+    state.canvas.width  = vidW
+    state.canvas.height = vidH
+    state.ctx.drawImage(state.video, 0, 0)
   }
 
   xhr.post(
@@ -50,7 +44,9 @@ export default function snap(state, _, send, done) {
         requests: [
           {
             image: {
-              content: state.canvas.toDataURL('image/jpeg', 1).replace('data:image/jpeg;base64,', '')
+              content: state.canvas
+                .toDataURL('image/jpeg', 1)
+                .replace('data:image/jpeg;base64,', '')
             },
             features: {type: 'LABEL_DETECTION', maxResults: 10}
           }
