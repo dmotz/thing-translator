@@ -32,7 +32,7 @@ export default function snap(state, _, send, done) {
   } else {
     state.ctx.drawImage(
       state.video,
-      (vidW - vidH) / 2,
+      Math.abs(vidW - vidH) / 2,
       0,
       vidH,
       vidH,
