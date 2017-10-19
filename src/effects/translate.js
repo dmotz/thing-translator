@@ -43,7 +43,8 @@ const setVoiceMap = voiceList => {
     korean:   /ko(-|_)kr/i,
     japanese: /ja(-|_)jp/i,
     dutch:    /nl(-|_)nl/i,
-    hindi:    /hi(-|_)in/i
+    hindi:    /hi(-|_)in/i,
+    russian:  /ru(-|_)ru/i
   }
 
   voiceMap = Object.keys(voiceRxs).reduce((a, k) => {
@@ -70,7 +71,8 @@ const langMap = {
   korean:   'ko',
   japanese: 'ja',
   dutch:    'nl',
-  hindi:    'hi'
+  hindi:    'hi',
+  russian:  'ru'
 }
 
 const cache = {}

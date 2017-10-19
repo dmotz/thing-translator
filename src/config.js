@@ -8,5 +8,5 @@ export const apiUrls = {
 
 export const langList = [
   'spanish', 'french', 'german', 'italian', 'chinese', 'japanese', 'korean',
-  'hindi', 'dutch'
+  'hindi', 'dutch', 'russian'
 ]
