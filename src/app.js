@@ -7,7 +7,7 @@ import requestFullscreen from './effects/request-fullscreen'
 import snap from './effects/snap'
 import translate from './effects/translate'
 import baseView from './views/base-view'
-
+import {langList} from './config'
 
 const app = choo()
 
@@ -25,7 +25,7 @@ app.model({
     fullscreen:  false,
     label:       '',
     translation: '',
-    activeLang:  'spanish',
+    activeLang:  langList[0],
     targetLang:  'english',
     guesses:     '',
     rotateTerms: true

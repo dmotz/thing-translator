@@ -6,7 +6,18 @@ export const apiUrls = {
   translate:   'https://www.googleapis.com/language/translate/v2?key=' + googleKey
 }
 
-export const langList = [
-  'spanish', 'french', 'german', 'italian', 'chinese', 'japanese', 'korean',
-  'hindi', 'dutch'
-]
+const queryLangs = window.location.search.slice(1)
+
+export const langList = queryLangs
+  ? queryLangs.split(',')
+  : [
+      'spanish',
+      'french',
+      'german',
+      'italian',
+      'chinese',
+      'japanese',
+      'korean',
+      'hindi',
+      'dutch'
+    ]
