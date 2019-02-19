@@ -1,8 +1,8 @@
-# [Thing Translator](https://oxism.com/thing-translator/)
+# [Thing Translator](https://thing-translator.appspot.com/)
 
 ### [An AI Experiment](https://aiexperiments.withgoogle.com/)
 
-✨ [Try the live demo here.](https://oxism.com/thing-translator/) ✨
+✨ [Try the live demo here.](https://thing-translator.appspot.com/) ✨
 
 ![](https://oxism.com/thing-translator/thing-translator.gif)
 
@@ -13,7 +13,7 @@
 Thing Translator is a web app that lets you point your phone (or laptop) at
 stuff to hear to say it in a different language. It was developed as part of
 Google's [AI Experiments](https://aiexperiments.withgoogle.com/) project. You
-can try the app [here](https://oxism.com/thing-translator/).
+can try the app [here](https://thing-translator.appspot.com/).
 
 Behind the scenes Thing Translator is using Google's
 [Cloud Vision](https://cloud.google.com/vision/) and
