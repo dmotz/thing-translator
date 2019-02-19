@@ -2,9 +2,9 @@ import xhr from 'xhr'
 import {apiUrls} from '../config'
 
 const breakPoint = 800
-const canvSize   = 640
-const targetPct  = 0.7
-const targetTop  = 0.4
+const canvSize = 640
+const targetPct = 0.7
+const targetTop = 0.4
 
 export default function snap(state, _, send, done) {
   send('startSnap', done)
@@ -15,15 +15,15 @@ export default function snap(state, _, send, done) {
   const vidH = state.video.videoHeight
 
   if (winW >= breakPoint) {
-    const cropSize   = Math.min(winW, winH) * targetPct
+    const cropSize = Math.min(winW, winH) * targetPct
     const sourceSize = (cropSize / Math.max(winW, winH)) * vidW
 
     state.canvas.width = state.canvas.height = canvSize
 
     state.ctx.drawImage(
       state.video,
-      Math.round(((winW / 2 - (cropSize / 2)) / winW) * vidW),
-      Math.round(((winH * targetTop - (cropSize / 2)) / winH) * vidH),
+      Math.round(((winW / 2 - cropSize / 2) / winW) * vidW),
+      Math.round(((winH * targetTop - cropSize / 2) / winH) * vidH),
       sourceSize,
       sourceSize,
       0,
@@ -32,7 +32,7 @@ export default function snap(state, _, send, done) {
       canvSize
     )
   } else {
-    state.canvas.width  = vidW
+    state.canvas.width = vidW
     state.canvas.height = vidH
     state.ctx.drawImage(state.video, 0, 0)
   }
@@ -55,7 +55,12 @@ export default function snap(state, _, send, done) {
     },
     (err, res, body) => {
       let labels
-      if (err || !body.responses || !body.responses.length || !body.responses[0].labelAnnotations) {
+      if (
+        err ||
+        !body.responses ||
+        !body.responses.length ||
+        !body.responses[0].labelAnnotations
+      ) {
         labels = []
       } else {
         labels = body.responses[0].labelAnnotations

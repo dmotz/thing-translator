@@ -13,41 +13,44 @@ const app = choo()
 
 app.model({
   state: {
-    activeView:  'main',
+    activeView: 'main',
     cameraReady: false,
     cameraError: false,
-    stream:      null,
-    video:       null,
-    ctx:         null,
-    canvas:      null,
-    isSnapping:  false,
-    firstTime:   true,
-    fullscreen:  false,
-    label:       '',
+    stream: null,
+    video: null,
+    ctx: null,
+    canvas: null,
+    isSnapping: false,
+    firstTime: true,
+    fullscreen: false,
+    label: '',
     translation: '',
-    activeLang:  langList[0],
-    targetLang:  'english',
-    guesses:     '',
+    activeLang: langList[0],
+    targetLang: 'english',
+    guesses: '',
     rotateTerms: true
   },
   subscriptions: [
-    (send, done) => document.addEventListener('DOMContentLoaded', _ => send('requestCamera', done))
+    (send, done) =>
+      window.document.addEventListener('DOMContentLoaded', () =>
+        send('requestCamera', done)
+      )
   ],
   reducers: {
-    showList:      _ => ({activeView: 'list'}),
-    showMain:      _ => ({activeView: 'main'}),
-    cameraError:   _ => ({cameraError: true}),
-    startSnap:     _ => ({isSnapping: true, firstTime: false}),
-    endSnap:       _ => ({isSnapping: false}),
-    setFullscreen: _ => ({fullscreen: true}),
-    setLabelPair:  (_, labels) => labels,
-    changeLang:    (_, lang) => ({
-      activeView:  'main',
-      activeLang:  lang,
-      label:       '',
+    showList: () => ({activeView: 'list'}),
+    showMain: () => ({activeView: 'main'}),
+    cameraError: () => ({cameraError: true}),
+    startSnap: () => ({isSnapping: true, firstTime: false}),
+    endSnap: () => ({isSnapping: false}),
+    setFullscreen: () => ({fullscreen: true}),
+    setLabelPair: (_, labels) => labels,
+    changeLang: (_, lang) => ({
+      activeView: 'main',
+      activeLang: lang,
+      label: '',
       translation: ''
     }),
-    setStream:     (_, {stream, video, ctx, canvas}) => ({
+    setStream: (_, {stream, video, ctx, canvas}) => ({
       cameraReady: true,
       stream,
       video,
@@ -64,4 +67,4 @@ app.model({
 })
 
 app.router({default: '/'}, [['/', baseView]])
-document.body.appendChild(app.start())
+window.document.body.appendChild(app.start())

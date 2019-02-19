@@ -1,13 +1,16 @@
 const {MediaStreamTrack} = window
-const {mediaDevices}     = navigator
-const sourceEnumSupport  = mediaDevices && mediaDevices.enumerateDevices
+const {mediaDevices} = navigator
+const sourceEnumSupport = mediaDevices && mediaDevices.enumerateDevices
 const streamTrackSupport = MediaStreamTrack && MediaStreamTrack.getSources
-const sourceSupport      = sourceEnumSupport || streamTrackSupport
+const sourceSupport = sourceEnumSupport || streamTrackSupport
 
 let attemptedTwice = false
 
 const getUserMedia = (() => {
-  const fn = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia
+  const fn =
+    navigator.getUserMedia ||
+    navigator.webkitGetUserMedia ||
+    navigator.mozGetUserMedia
   return fn ? fn.bind(navigator) : null
 })()
 
@@ -15,7 +18,6 @@ const findBestSource = sources => {
   let source = null
 
   if (sourceSupport && sources && sources.length) {
-
     if (sourceEnumSupport) {
       for (let i = 0; i < sources.length; i++) {
         const candidate = sources[i]
@@ -48,18 +50,19 @@ const findBestSource = sources => {
 }
 
 const activateCamera = (send, done, noConstraint) => {
-  navigator.mediaDevices.getUserMedia({
-    audio: false,
-    video: noConstraint || {facingMode: 'environment'}
-  })
-  .then(stream => cameraSuccess(stream, send, done))
-  .catch(err => {
-    if (!noConstraint && err.name === 'ConstraintNotSatisfiedError') {
-      return activateCamera(send, done, true)
-    }
-    console.error(err)
-    send('cameraError', done)
-  })
+  navigator.mediaDevices
+    .getUserMedia({
+      audio: false,
+      video: noConstraint || {facingMode: 'environment'}
+    })
+    .then(stream => cameraSuccess(stream, send, done))
+    .catch(err => {
+      if (!noConstraint && err.name === 'ConstraintNotSatisfiedError') {
+        return activateCamera(send, done, true)
+      }
+      console.error(err)
+      send('cameraError', done)
+    })
 }
 
 const activateCameraLegacy = (sources, send, done) => {
@@ -69,7 +72,11 @@ const activateCameraLegacy = (sources, send, done) => {
     {
       audio: false,
       video: source
-        ? {optional: [{sourceId: sourceEnumSupport ? source.deviceId : source.id}]}
+        ? {
+            optional: [
+              {sourceId: sourceEnumSupport ? source.deviceId : source.id}
+            ]
+          }
         : true
     },
     stream => {
@@ -91,8 +98,8 @@ const activateCameraLegacy = (sources, send, done) => {
 }
 
 const cameraSuccess = (stream, send, done) => {
-  const canvas  = document.getElementById('canvas')
-  const videoEl = document.getElementById('video')
+  const canvas = window.document.getElementById('canvas')
+  const videoEl = window.document.getElementById('video')
 
   videoEl.srcObject = stream
 
@@ -100,7 +107,7 @@ const cameraSuccess = (stream, send, done) => {
     'setStream',
     {
       video: videoEl,
-      ctx:   canvas.getContext('2d'),
+      ctx: canvas.getContext('2d'),
       stream,
       canvas
     },
@@ -109,10 +116,10 @@ const cameraSuccess = (stream, send, done) => {
 }
 
 const enumerateDevices = (send, done) =>
-  mediaDevices.enumerateDevices()
+  mediaDevices
+    .enumerateDevices()
     .then(sources => activateCameraLegacy(sources, send, done))
-    .catch(_ => activateCameraLegacy(null, send, done))
-
+    .catch(() => activateCameraLegacy(null, send, done))
 
 export default function requestCamera(state, _, send, done) {
   if (state.cameraReady) {
@@ -130,7 +137,9 @@ export default function requestCamera(state, _, send, done) {
   if (sourceEnumSupport) {
     enumerateDevices(send, done)
   } else if (streamTrackSupport) {
-    MediaStreamTrack.getSources(sources => activateCameraLegacy(sources, send, done))
+    MediaStreamTrack.getSources(sources =>
+      activateCameraLegacy(sources, send, done)
+    )
   } else {
     activateCameraLegacy(null, send, done)
   }
