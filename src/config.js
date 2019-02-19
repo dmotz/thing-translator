@@ -1,5 +1,7 @@
-// Insert your own API key here:
 const googleKey = '@@@@@'
+  .split('')
+  .reverse()
+  .join('')
 
 export const apiUrls = {
   cloudVision:
