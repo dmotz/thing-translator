@@ -1,0 +1,20 @@
+runtime: python27
+api_version: 1
+threadsafe: true
+
+handlers:
+  - url: /
+    static_files: index.html
+    upload: index.html
+    secure: always
+
+  - url: /app.js
+    static_files: app.js
+    upload: app.js
+
+  - url: /app.css
+    static_files: app.css
+    upload: app.css
+
+skip_files:
+  - ^node_modules
