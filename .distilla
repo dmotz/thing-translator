@@ -6,10 +6,10 @@ hashing:
     - app.css
 
 tasks:
-  npm run bundle-js:
+  npm run build-js:
     - app.js
     - app.js
 
-  npm run bundle-css:
+  npm run build-css:
     - app.css
     - app.css
