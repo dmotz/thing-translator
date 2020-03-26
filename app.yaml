@@ -15,6 +15,3 @@ handlers:
   - url: /app.css
     static_files: app.css
     upload: app.css
-
-skip_files:
-  - ^node_modules
