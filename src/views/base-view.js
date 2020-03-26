@@ -8,9 +8,9 @@ export default (state, prev, send) =>
   html`
     <main
       class="app"
-      ontouchstart="${
-        !state.fullscreen ? send.bind(null, 'requestFullscreen') : null
-      }"
+      ontouchstart="${!state.fullscreen
+        ? send.bind(null, 'requestFullscreen')
+        : null}"
     >
       <div id="shroud"></div>
 
@@ -24,19 +24,15 @@ export default (state, prev, send) =>
         <circle />
       </svg>
 
-      ${
-        state.cameraError
-          ? errorView()
-          : html`
-              <div>
-                ${targetView(state, prev, send)}
-                ${
-                  state.activeView === 'main'
-                    ? mainView(state, prev, send)
-                    : listView(state, prev, send)
-                }
-              </div>
-            `
-      }
+      ${state.cameraError
+        ? errorView()
+        : html`
+            <div>
+              ${targetView(state, prev, send)}
+              ${state.activeView === 'main'
+                ? mainView(state, prev, send)
+                : listView(state, prev, send)}
+            </div>
+          `}
     </main>
   `
