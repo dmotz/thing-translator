@@ -1,6 +1,6 @@
 {
   "name": "thing-translator",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Thing Translator is an AI Experiment that lets you point your camera at things to hear how to say them in a different language.",
   "private": true,
   "main": "src/app.js",
