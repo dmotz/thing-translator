@@ -1,0 +1,11 @@
+node_modules/
+src/
+style/
+.distilla
+.gitignore
+.gitcloudignore
+api_key
+LICENSE
+package.json
+package-lock.json
+README.md
