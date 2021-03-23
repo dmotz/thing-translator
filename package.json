@@ -25,19 +25,19 @@
     "choo": "^4.0.3",
     "he": "^1.2.0",
     "nib": "^1.1.2",
-    "xhr": "^2.5.0"
+    "xhr": "^2.6.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.9.0",
+    "@babel/core": "^7.13.10",
     "@babel/preset-env": "^7.9.0",
     "babel-plugin-yo-yoify": "^2.0.0",
     "babelify": "^10.0.0",
-    "browserify": "^16.5.0",
+    "browserify": "^17.0.0",
     "budo": "^11.6.3",
     "distilla": "0.0.1",
     "envify": "^4.1.0",
     "parallelshell": "3.0.1",
-    "stylus": "^0.54.7",
+    "stylus": "^0.54.8",
     "uglifyify": "^5.0.2",
     "unassertify": "^2.1.1"
   },

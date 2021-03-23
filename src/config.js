@@ -1,7 +1,4 @@
-const googleKey = '@@@@@'
-  .split('')
-  .reverse()
-  .join('')
+const googleKey = '@@@@@'.split('').reverse().join('')
 
 export const apiUrls = {
   cloudVision:
